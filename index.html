@@ -1,0 +1,137 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Hậu Phạm — Full-stack Java Developer</title>
+    <meta name="description"
+          content="Hậu Phạm — Full-stack Java Developer. Enterprise systems for manufacturing: shopfloor tracking, RFID warehousing, quality inspection.">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;600;700&family=Manrope:wght@400;500;600;700;800&family=JetBrains+Mono:wght@400;500;600&display=swap"
+          rel="stylesheet">
+    <link rel="stylesheet" href="assets/styles.css">
+</head>
+<body>
+<div id="cvRoot">
+
+    <header class="nav no-print">
+        <div class="nav-inner">
+            <a href="#top" class="brand">
+                <span class="brand-mark">HP</span>
+                <span class="brand-name">Hậu Phạm</span>
+            </a>
+            <nav class="links">
+                <a id="navAbout" href="#about">About</a>
+                <a id="navSkills" href="#skills">Skills</a>
+                <a id="navExperience" href="#experience">Experience</a>
+                <a id="navProjects" href="#projects">Projects</a>
+            </nav>
+            <div class="nav-actions">
+                <div class="seg">
+                    <button id="btnEn" data-active="true">EN</button>
+                    <button id="btnVi" data-active="false">VI</button>
+                </div>
+                <button id="themeBtn" class="icon-btn" title="Theme" aria-label="Toggle theme"></button>
+                <button id="exportBtn" class="pdf-btn">
+                    <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
+                         stroke-linecap="round" stroke-linejoin="round">
+                        <path d="M12 3v12M7 11l5 5 5-5M5 21h14"></path>
+                    </svg>
+                    <span id="exportLabel">Export PDF</span>
+                </button>
+            </div>
+        </div>
+    </header>
+
+    <main id="top" class="wrap">
+
+        <section class="hero">
+            <div id="avatarFrame" class="avatar-frame" tabindex="0" role="button" aria-label="Upload profile photo">
+                <img id="avatarImg" alt="Hậu Phạm" style="display:none">
+                <span id="avatarPh" class="avatar-ph"><span>Drop your photo</span></span>
+                <input id="avatarInput" type="file" accept="image/*" hidden>
+            </div>
+            <div class="hero-body">
+                <div class="avail">
+                    <span class="pulse"></span>
+                    <span id="availText">Open to opportunities</span>
+                </div>
+                <h1 class="hero-name">Hậu Phạm</h1>
+                <p class="hero-dob"><span id="dobLabel" class="lbl">Date of birth</span> &nbsp;<span id="dobValue">10/05/1996</span>
+                </p>
+                <p class="hero-role">&lt;/&gt; <span id="roleTitle">Full-stack Java Developer</span></p>
+                <p id="tagline" class="hero-tagline"></p>
+                <div class="hero-cta">
+                    <a id="heroGithub" href="#" target="_blank" rel="noopener" class="btn-outline">
+                        <svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor">
+                            <path d="M12 2C6.48 2 2 6.58 2 12.25c0 4.53 2.87 8.37 6.84 9.73.5.1.68-.22.68-.49 0-.24-.01-.88-.01-1.73-2.78.62-3.37-1.21-3.37-1.21-.46-1.18-1.11-1.49-1.11-1.49-.91-.64.07-.62.07-.62 1 .07 1.53 1.06 1.53 1.06.9 1.56 2.36 1.11 2.94.85.09-.66.35-1.11.63-1.37-2.22-.26-4.55-1.14-4.55-5.05 0-1.12.39-2.03 1.03-2.75-.1-.26-.45-1.3.1-2.71 0 0 .84-.27 2.75 1.05a9.4 9.4 0 0 1 5 0c1.91-1.32 2.75-1.05 2.75-1.05.55 1.41.2 2.45.1 2.71.64.72 1.03 1.63 1.03 2.75 0 3.92-2.34 4.79-4.57 5.04.36.32.68.94.68 1.9 0 1.37-.01 2.48-.01 2.82 0 .27.18.6.69.49A10.02 10.02 0 0 0 22 12.25C22 6.58 17.52 2 12 2z"></path>
+                        </svg>
+                        GitHub
+                    </a>
+                    <a id="heroEmail" href="#" class="btn-outline">
+                        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                             stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                            <rect x="3" y="5" width="18" height="14" rx="2"></rect>
+                            <path d="m3 7 9 6 9-6"></path>
+                        </svg>
+                        <span id="emailMeText">Email me</span>
+                    </a>
+                </div>
+            </div>
+        </section>
+
+        <section class="contact-section">
+            <div id="contactGrid" class="contact-grid"></div>
+        </section>
+
+        <section id="about" class="section">
+            <div class="sec-head"><span id="aboutNum" class="sec-num">01</span>
+                <h2 id="aboutTitle" class="sec-title">About</h2><span class="sec-rule"></span></div>
+            <div id="aboutBody" class="about-card" data-print-avoid></div>
+        </section>
+
+        <section id="skills" class="section">
+            <div class="sec-head"><span id="skillsNum" class="sec-num">02</span>
+                <h2 id="skillsTitle" class="sec-title">Skills</h2><span class="sec-rule"></span></div>
+            <div id="skillsGrid" class="skills-grid"></div>
+        </section>
+
+        <section id="education" class="section">
+            <div class="sec-head"><span id="eduNum" class="sec-num">03</span>
+                <h2 id="eduTitle" class="sec-title">Education</h2><span class="sec-rule"></span></div>
+            <div id="eduCard" class="edu-card" data-print-avoid></div>
+        </section>
+
+        <section id="experience" class="section">
+            <div class="sec-head" style="margin-bottom:34px"><span id="expNum" class="sec-num">04</span>
+                <h2 id="expTitle" class="sec-title">Work Experience</h2><span class="sec-rule"></span></div>
+            <div id="timeline" class="timeline"></div>
+        </section>
+
+        <section id="projects" class="section" style="padding-bottom:30px">
+            <div class="sec-head"><span id="prjNum" class="sec-num">05</span>
+                <h2 id="prjTitle" class="sec-title">Personal Projects</h2><span class="sec-rule"></span></div>
+            <div id="projectsGrid" class="projects-grid"></div>
+        </section>
+
+        <footer class="foot">
+            <p class="foot-name">Hậu Phạm</p>
+            <p id="footRole" class="foot-role"></p>
+            <div class="foot-links no-print">
+                <a id="footEmail" href="#"></a>
+                <span class="dot">·</span>
+                <a id="footGithub" href="#" target="_blank" rel="noopener">GitHub</a>
+                <span class="dot">·</span>
+                <a id="footFacebook" href="#" target="_blank" rel="noopener">Facebook</a>
+            </div>
+        </footer>
+
+    </main>
+</div>
+
+<script src="assets/avatar.js"></script>
+<script src="assets/data.js"></script>
+<script src="assets/app.js"></script>
+</body>
+</html>

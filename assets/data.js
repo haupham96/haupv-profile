@@ -18,7 +18,7 @@ window.T = {
         nav: {about: 'About', skills: 'Skills', experience: 'Experience', projects: 'Projects'},
         ui: {
             available: 'Open to opportunities',
-            roleTitle: 'Full-stack Java Developer',
+            roleTitle: 'Full-stack Developer',
             tagline: 'I build enterprise systems for manufacturing — from shopfloor tracking and RFID warehousing to quality inspection — connecting Java backends with the devices on the factory floor.',
             emailMe: 'Email me',
             exportPdf: 'Export PDF',
@@ -35,7 +35,7 @@ window.T = {
             sectionProjects: 'Personal Projects'
         },
         about: [
-            'Full-stack Java Developer with experience in building enterprise systems for manufacturing, warehouse management, quality inspection, construction management, and medical record systems. Strong background in backend development using Java, Spring Boot, Spring MVC, MyBatis, Hibernate, and relational databases such as MySQL and PostgreSQL.',
+            'Full-stack Developer with experience in building enterprise systems for manufacturing, warehouse management, quality inspection, construction management, and medical record systems. Strong background in backend development using Java, Spring Boot, Spring MVC, MyBatis, Hibernate, and relational databases such as MySQL and PostgreSQL.',
             'Experienced in developing mobile and web applications using Vue.js, uni-app, HBuilderX, TypeScript, Knockout.js, JSP, Angular, HTML, CSS, JavaScript, and Bootstrap. Hands-on experience with barcode scanning, NFC check-in/check-out, RFID device integration, Android shopfloor applications, reporting, production tracking, and hardware SDK integration.',
             'Skilled in analyzing business workflows, designing database structures, developing backend APIs, building user-facing applications, and integrating systems with factory devices to improve traceability, production visibility, and operational efficiency.'
         ],
@@ -188,7 +188,7 @@ window.T = {
         nav: {about: 'Giới thiệu', skills: 'Kỹ năng', experience: 'Kinh nghiệm', projects: 'Dự án'},
         ui: {
             available: 'Sẵn sàng cho cơ hội mới',
-            roleTitle: 'Lập trình viên Full-stack Java',
+            roleTitle: 'Lập trình viên Full-stack',
             tagline: 'Tôi xây dựng các hệ thống doanh nghiệp cho ngành sản xuất — từ theo dõi shopfloor, kho RFID đến kiểm tra chất lượng — kết nối backend Java với các thiết bị tại nhà máy.',
             emailMe: 'Gửi email',
             exportPdf: 'Xuất PDF',
@@ -205,7 +205,7 @@ window.T = {
             sectionProjects: 'Dự án cá nhân'
         },
         about: [
-            'Lập trình viên Full-stack Java có kinh nghiệm xây dựng các hệ thống doanh nghiệp trong lĩnh vực sản xuất, quản lý kho, kiểm tra chất lượng, quản lý công trình và hệ thống hồ sơ y tế. Có nền tảng vững về backend với Java, Spring Boot, Spring MVC, MyBatis, Hibernate và các cơ sở dữ liệu quan hệ như MySQL, PostgreSQL.',
+            'Lập trình viên Full-stack có kinh nghiệm xây dựng các hệ thống doanh nghiệp trong lĩnh vực sản xuất, quản lý kho, kiểm tra chất lượng, quản lý công trình và hệ thống hồ sơ y tế. Có nền tảng vững về backend với Java, Spring Boot, Spring MVC, MyBatis, Hibernate và các cơ sở dữ liệu quan hệ như MySQL, PostgreSQL.',
             'Có kinh nghiệm phát triển ứng dụng web và mobile sử dụng Vue.js, uni-app, HBuilderX, TypeScript, Knockout.js, JSP, Angular, HTML, CSS, JavaScript và Bootstrap. Có kinh nghiệm thực tế với barcode scanning, NFC check-in/check-out, tích hợp thiết bị RFID, ứng dụng Android cho nhà máy, báo cáo, theo dõi sản xuất và tích hợp SDK phần cứng.',
             'Có khả năng phân tích quy trình nghiệp vụ, thiết kế cấu trúc dữ liệu, phát triển backend API, xây dựng giao diện người dùng và tích hợp hệ thống với thiết bị nhà máy nhằm cải thiện khả năng truy xuất, theo dõi sản xuất và hiệu quả vận hành.'
         ],

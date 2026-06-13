@@ -35,10 +35,14 @@
                 </div>
                 <button class="icon-btn" title="Theme" aria-label="Toggle theme" @click="toggleTheme"
                         type="button">
-                    <svg class="inline-icon" aria-hidden="true"><use :href="themeIcon"></use></svg>
+                    <svg class="inline-icon" aria-hidden="true">
+                        <use :href="themeIcon"></use>
+                    </svg>
                 </button>
                 <button class="pdf-btn" @click="exportPdf">
-                    <svg class="inline-icon" aria-hidden="true"><use :href="icons.download"></use></svg>
+                    <svg class="inline-icon" aria-hidden="true">
+                        <use :href="icons.download"></use>
+                    </svg>
                     <span>{{ current.ui.exportPdf }}</span>
                 </button>
             </div>
@@ -77,11 +81,15 @@
                 <p class="hero-tagline">{{ current.ui.tagline }}</p>
                 <div class="hero-cta">
                     <a :href="contact.githubUrl" target="_blank" rel="noopener" class="btn-outline">
-                        <svg class="inline-icon" aria-hidden="true"><use :href="icons.github"></use></svg>
+                        <svg class="inline-icon" aria-hidden="true">
+                            <use :href="icons.github"></use>
+                        </svg>
                         GitHub
                     </a>
                     <a :href="mailHref" class="btn-outline">
-                        <svg class="inline-icon" aria-hidden="true"><use :href="icons.mail"></use></svg>
+                        <svg class="inline-icon" aria-hidden="true">
+                            <use :href="icons.mail"></use>
+                        </svg>
                         <span>{{ current.ui.emailMe }}</span>
                     </a>
                 </div>
@@ -158,7 +166,8 @@
                     </div>
                     <p class="edu-prog">{{ current.education.program }}</p>
                     <div style="display:flex;flex-wrap:wrap;gap:7px">
-                        <span v-for="tech in current.education.tech" :key="tech" class="chip chip-neutral">{{ tech }}</span>
+                        <span v-for="tech in current.education.tech" :key="tech" class="chip chip-neutral">{{ tech
+                            }}</span>
                     </div>
                 </div>
             </div>
@@ -189,7 +198,8 @@
                             </div>
                             <p class="proj-sub">{{ project.sub }}</p>
                             <div style="display:flex;flex-wrap:wrap;gap:6px;margin-bottom:14px">
-                                <span v-for="tech in project.stack" :key="tech" class="chip chip-soft sm">{{ tech }}</span>
+                                <span v-for="tech in project.stack" :key="tech" class="chip chip-soft sm">{{ tech
+                                    }}</span>
                             </div>
                             <ul class="bullets">
                                 <li v-for="bullet in project.bullets" :key="bullet" class="bullet">{{ bullet }}</li>
@@ -207,7 +217,8 @@
                 <span class="sec-rule"></span>
             </div>
             <div class="projects-grid">
-                <div v-for="project in current.projects" :key="project.name" class="card prj-card-outer" data-print-avoid>
+                <div v-for="project in current.projects" :key="project.name" class="card prj-card-outer"
+                     data-print-avoid>
                     <div style="display:flex;align-items:center;justify-content:space-between;gap:12px;margin-bottom:12px">
                         <span class="prj-ico" style="overflow:hidden">
                             <img v-if="project.icon"

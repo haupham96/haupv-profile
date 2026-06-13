@@ -45,9 +45,37 @@ h1, h2, h3, h4 {
 }
 
 #cvRoot {
+    position: relative;
     background: var(--bg);
     color: var(--text);
     min-height: 100vh;
+}
+
+/* Ambient gradient mesh — gives the frosted glass something to refract */
+#cvRoot::before {
+    content: "";
+    position: fixed;
+    inset: 0;
+    z-index: -1;
+    pointer-events: none;
+    background:
+        radial-gradient(42vw 42vw at 12% 8%, var(--mesh-1), transparent 60%),
+        radial-gradient(46vw 46vw at 88% 18%, var(--mesh-2), transparent 62%),
+        radial-gradient(50vw 50vw at 50% 100%, var(--mesh-3), transparent 60%);
+    transition: background .3s;
+}
+
+/* Fallback for browsers without backdrop-filter — restore opaque surfaces */
+@supports not ((backdrop-filter: blur(1px)) or (-webkit-backdrop-filter: blur(1px))) {
+    #cvRoot::before {
+        opacity: .45
+    }
+
+    .card, .about-card, .edu-card, .proj-card, .contact-card,
+    header.nav, .btn-outline, .icon-btn, .seg, .prj-link,
+    .chip-soft, .chip-neutral, .avail {
+        background-color: var(--bg)
+    }
 }
 
 .wrap {
@@ -60,10 +88,11 @@ header.nav {
     position: sticky;
     top: 0;
     z-index: 60;
-    backdrop-filter: blur(14px);
-    -webkit-backdrop-filter: blur(14px);
+    backdrop-filter: blur(22px) saturate(160%);
+    -webkit-backdrop-filter: blur(22px) saturate(160%);
     background: var(--nav);
-    border-bottom: 1px solid var(--border)
+    border-bottom: 1px solid var(--glass-border);
+    box-shadow: inset 0 1px 0 var(--glass-highlight)
 }
 
 .nav-inner {
@@ -134,9 +163,11 @@ nav.links a:hover {
     display: flex;
     gap: 3px;
     padding: 3px;
-    background: var(--bg2);
+    background: var(--card2);
+    backdrop-filter: blur(10px) saturate(150%);
+    -webkit-backdrop-filter: blur(10px) saturate(150%);
     border-radius: 9px;
-    border: 1px solid var(--border)
+    border: 1px solid var(--glass-border)
 }
 
 .seg button {
@@ -165,10 +196,13 @@ nav.links a:hover {
     align-items: center;
     justify-content: center;
     border-radius: 9px;
-    border: 1px solid var(--border);
+    border: 1px solid var(--glass-border);
     background: var(--card);
+    backdrop-filter: blur(10px) saturate(150%);
+    -webkit-backdrop-filter: blur(10px) saturate(150%);
     color: var(--text);
     cursor: pointer;
+    box-shadow: inset 0 1px 0 var(--glass-highlight);
     transition: border-color .18s
 }
 
@@ -214,10 +248,10 @@ nav.links a:hover {
     height: 200px;
     overflow: hidden;
     border-radius: 26px;
-    box-shadow: 0 1px 3px var(--shadow);
+    box-shadow: inset 0 1px 0 var(--glass-highlight), 0 8px 30px var(--glass-shadow);
     cursor: pointer;
     background: var(--card2);
-    border: 1px solid var(--border);
+    border: 1px solid var(--glass-border);
     outline: none
 }
 
@@ -268,6 +302,9 @@ nav.links a:hover {
     padding: 5px 12px;
     border-radius: 999px;
     background: var(--accent-soft);
+    backdrop-filter: blur(10px) saturate(150%);
+    -webkit-backdrop-filter: blur(10px) saturate(150%);
+    border: 1px solid var(--glass-border);
     margin-bottom: 18px
 }
 
@@ -337,11 +374,14 @@ nav.links a:hover {
     gap: 8px;
     padding: 9px 16px;
     border-radius: 10px;
-    border: 1px solid var(--border);
+    border: 1px solid var(--glass-border);
     background: var(--card);
+    backdrop-filter: blur(10px) saturate(150%);
+    -webkit-backdrop-filter: blur(10px) saturate(150%);
     color: var(--text);
     font-size: 14px;
     font-weight: 600;
+    box-shadow: inset 0 1px 0 var(--glass-highlight);
     transition: border-color .18s, color .18s
 }
 
@@ -368,8 +408,10 @@ nav.links a:hover {
     padding: 15px 17px;
     border-radius: 13px;
     background: var(--card);
-    border: 1px solid var(--border);
-    box-shadow: 0 1px 2px var(--shadow);
+    backdrop-filter: blur(18px) saturate(160%);
+    -webkit-backdrop-filter: blur(18px) saturate(160%);
+    border: 1px solid var(--glass-border);
+    box-shadow: inset 0 1px 0 var(--glass-highlight), 0 8px 30px var(--glass-shadow);
     transition: border-color .18s
 }
 
@@ -446,9 +488,11 @@ nav.links a:hover {
 
 .card {
     background: var(--card);
-    border: 1px solid var(--border);
+    backdrop-filter: blur(18px) saturate(160%);
+    -webkit-backdrop-filter: blur(18px) saturate(160%);
+    border: 1px solid var(--glass-border);
     border-radius: 14px;
-    box-shadow: 0 1px 2px var(--shadow)
+    box-shadow: inset 0 1px 0 var(--glass-highlight), 0 8px 30px var(--glass-shadow)
 }
 
 .pad20 {
@@ -476,6 +520,9 @@ nav.links a:hover {
     padding: 5px 11px;
     border-radius: 8px;
     background: var(--accent-soft);
+    backdrop-filter: blur(8px) saturate(150%);
+    -webkit-backdrop-filter: blur(8px) saturate(150%);
+    border: 1px solid var(--glass-border);
     color: var(--accent-text);
     font-size: 13px
 }
@@ -489,7 +536,10 @@ nav.links a:hover {
 .chip-neutral {
     padding: 4px 10px;
     border-radius: 7px;
-    background: var(--bg2);
+    background: var(--card2);
+    backdrop-filter: blur(8px) saturate(150%);
+    -webkit-backdrop-filter: blur(8px) saturate(150%);
+    border: 1px solid var(--glass-border);
     color: var(--muted);
     font-size: 12.5px;
     font-weight: 500
@@ -498,10 +548,12 @@ nav.links a:hover {
 /* ---- About ---- */
 .about-card {
     background: var(--card);
-    border: 1px solid var(--border);
+    backdrop-filter: blur(18px) saturate(160%);
+    -webkit-backdrop-filter: blur(18px) saturate(160%);
+    border: 1px solid var(--glass-border);
     border-radius: 16px;
     padding: 30px 32px;
-    box-shadow: 0 1px 3px var(--shadow);
+    box-shadow: inset 0 1px 0 var(--glass-highlight), 0 8px 30px var(--glass-shadow);
     display: flex;
     flex-direction: column;
     gap: 16px
@@ -516,10 +568,12 @@ nav.links a:hover {
 /* ---- Education ---- */
 .edu-card {
     background: var(--card);
-    border: 1px solid var(--border);
+    backdrop-filter: blur(18px) saturate(160%);
+    -webkit-backdrop-filter: blur(18px) saturate(160%);
+    border: 1px solid var(--glass-border);
     border-radius: 16px;
     padding: 26px 30px;
-    box-shadow: 0 1px 3px var(--shadow);
+    box-shadow: inset 0 1px 0 var(--glass-highlight), 0 8px 30px var(--glass-shadow);
     display: flex;
     gap: 20px;
     flex-wrap: wrap;
@@ -620,9 +674,12 @@ nav.links a:hover {
 
 .proj-card {
     background: var(--card2);
-    border: 1px solid var(--border);
+    backdrop-filter: blur(14px) saturate(150%);
+    -webkit-backdrop-filter: blur(14px) saturate(150%);
+    border: 1px solid var(--glass-border);
     border-radius: 13px;
-    padding: 20px 22px
+    padding: 20px 22px;
+    box-shadow: inset 0 1px 0 var(--glass-highlight)
 }
 
 .proj-name {
@@ -718,11 +775,14 @@ nav.links a:hover {
     gap: 6px;
     padding: 7px 13px;
     border-radius: 9px;
-    border: 1px solid var(--border);
+    border: 1px solid var(--glass-border);
     background: var(--card2);
+    backdrop-filter: blur(10px) saturate(150%);
+    -webkit-backdrop-filter: blur(10px) saturate(150%);
     color: var(--text);
     font-size: 13px;
     font-weight: 600;
+    box-shadow: inset 0 1px 0 var(--glass-highlight);
     transition: border-color .18s, color .18s
 }
 
@@ -796,10 +856,55 @@ footer.foot {
         --accent-text: #075985;
         --shadow: transparent;
         --shadow-lg: transparent;
+        --glass-border: #dfe3e8;
+        --glass-highlight: transparent;
+        --glass-shadow: transparent;
+        --glass-tint: #ffffff;
+        --mesh-1: transparent;
+        --mesh-2: transparent;
+        --mesh-3: transparent;
     }
 
     body {
         background: #fff !important
+    }
+
+    #cvRoot::before {
+        display: none !important
+    }
+
+    * {
+        backdrop-filter: none !important;
+        -webkit-backdrop-filter: none !important
+    }
+
+    /* Inline theme vars on #cvRoot shadow the print var overrides, so set
+       solid borders/backgrounds directly on the glass surfaces here. */
+    .card, .about-card, .edu-card, .contact-card,
+    .proj-card, .btn-outline, .icon-btn, .seg, .prj-link {
+        background-color: #ffffff !important;
+        border-color: #dfe3e8 !important
+    }
+
+    /* Preserve chip pill styling in the PDF (print strips backgrounds by default) */
+    .chip-soft, .chip-neutral, .avail {
+        border-color: transparent !important;
+        -webkit-print-color-adjust: exact;
+        print-color-adjust: exact
+    }
+
+    .chip-soft {
+        background-color: #eaf4fb !important;
+        color: #075985 !important
+    }
+
+    .chip-neutral {
+        background-color: #eef2f6 !important;
+        color: #475467 !important
+    }
+
+    .avail {
+        background-color: #eaf4fb !important
     }
 
     [data-print-avoid] {

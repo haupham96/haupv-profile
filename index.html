@@ -14,7 +14,7 @@
     <link rel="stylesheet" href="assets/styles.css">
 </head>
 <body>
-<div id="cvRoot">
+<div id="cvRoot" v-cloak>
 
     <header class="nav no-print">
         <div class="nav-inner">
@@ -23,23 +23,23 @@
                 <span class="brand-name">Hậu Phạm</span>
             </a>
             <nav class="links">
-                <a id="navAbout" href="#about">About</a>
-                <a id="navSkills" href="#skills">Skills</a>
-                <a id="navExperience" href="#experience">Experience</a>
-                <a id="navProjects" href="#projects">Projects</a>
+                <a href="#about">{{ current.nav.about }}</a>
+                <a href="#skills">{{ current.nav.skills }}</a>
+                <a href="#experience">{{ current.nav.experience }}</a>
+                <a href="#projects">{{ current.nav.projects }}</a>
             </nav>
             <div class="nav-actions">
                 <div class="seg">
-                    <button id="btnEn" data-active="true">EN</button>
-                    <button id="btnVi" data-active="false">VI</button>
+                    <button @click="setLang('en')" :data-active="lang === 'en'">EN</button>
+                    <button @click="setLang('vi')" :data-active="lang === 'vi'">VI</button>
                 </div>
-                <button id="themeBtn" class="icon-btn" title="Theme" aria-label="Toggle theme"></button>
-                <button id="exportBtn" class="pdf-btn">
-                    <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
-                         stroke-linecap="round" stroke-linejoin="round">
-                        <path d="M12 3v12M7 11l5 5 5-5M5 21h14"></path>
-                    </svg>
-                    <span id="exportLabel">Export PDF</span>
+                <button class="icon-btn" title="Theme" aria-label="Toggle theme" @click="toggleTheme"
+                        type="button">
+                    <svg class="inline-icon" aria-hidden="true"><use :href="themeIcon"></use></svg>
+                </button>
+                <button class="pdf-btn" @click="exportPdf">
+                    <svg class="inline-icon" aria-hidden="true"><use :href="icons.download"></use></svg>
+                    <span>{{ current.ui.exportPdf }}</span>
                 </button>
             </div>
         </div>
@@ -48,83 +48,207 @@
     <main id="top" class="wrap">
 
         <section class="hero">
-            <div id="avatarFrame" class="avatar-frame" tabindex="0" role="button" aria-label="Upload profile photo">
-                <img id="avatarImg" alt="Hậu Phạm" style="display:none">
-                <span id="avatarPh" class="avatar-ph"><span>Drop your photo</span></span>
-                <input id="avatarInput" type="file" accept="image/*" hidden>
+            <div class="avatar-frame"
+                 :class="{ drag: avatarDragging }"
+                 tabindex="0"
+                 role="button"
+                 aria-label="Upload profile photo"
+                 @click="chooseAvatar"
+                 @keydown="onAvatarKeydown"
+                 @dragenter.prevent="setAvatarDragging(true)"
+                 @dragover.prevent="setAvatarDragging(true)"
+                 @dragleave.prevent="setAvatarDragging(false)"
+                 @drop.prevent="onAvatarDrop">
+                <img v-if="avatarSrc" :src="avatarSrc" alt="Hậu Phạm">
+                <span v-else class="avatar-ph"><span>Drop your photo</span></span>
+                <input ref="avatarInput" type="file" accept="image/*" hidden @change="onAvatarChange">
             </div>
             <div class="hero-body">
                 <div class="avail">
                     <span class="pulse"></span>
-                    <span id="availText">Open to opportunities</span>
+                    <span>{{ current.ui.available }}</span>
                 </div>
                 <h1 class="hero-name">Hậu Phạm</h1>
-                <p class="hero-dob"><span id="dobLabel" class="lbl">Date of birth</span> &nbsp;<span id="dobValue">10/05/1996</span>
+                <p class="hero-dob">
+                    <span class="lbl">{{ current.ui.labelDob }}</span>
+                    &nbsp;<span>{{ contact.dob }}</span>
                 </p>
-                <p class="hero-role">&lt;/&gt; <span id="roleTitle">Full-stack Developer</span></p>
-                <p id="tagline" class="hero-tagline"></p>
+                <p class="hero-role">&lt;/&gt; <span>{{ current.ui.roleTitle }}</span></p>
+                <p class="hero-tagline">{{ current.ui.tagline }}</p>
                 <div class="hero-cta">
-                    <a id="heroGithub" href="#" target="_blank" rel="noopener" class="btn-outline">
-                        <svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor">
-                            <path d="M12 2C6.48 2 2 6.58 2 12.25c0 4.53 2.87 8.37 6.84 9.73.5.1.68-.22.68-.49 0-.24-.01-.88-.01-1.73-2.78.62-3.37-1.21-3.37-1.21-.46-1.18-1.11-1.49-1.11-1.49-.91-.64.07-.62.07-.62 1 .07 1.53 1.06 1.53 1.06.9 1.56 2.36 1.11 2.94.85.09-.66.35-1.11.63-1.37-2.22-.26-4.55-1.14-4.55-5.05 0-1.12.39-2.03 1.03-2.75-.1-.26-.45-1.3.1-2.71 0 0 .84-.27 2.75 1.05a9.4 9.4 0 0 1 5 0c1.91-1.32 2.75-1.05 2.75-1.05.55 1.41.2 2.45.1 2.71.64.72 1.03 1.63 1.03 2.75 0 3.92-2.34 4.79-4.57 5.04.36.32.68.94.68 1.9 0 1.37-.01 2.48-.01 2.82 0 .27.18.6.69.49A10.02 10.02 0 0 0 22 12.25C22 6.58 17.52 2 12 2z"></path>
-                        </svg>
+                    <a :href="contact.githubUrl" target="_blank" rel="noopener" class="btn-outline">
+                        <svg class="inline-icon" aria-hidden="true"><use :href="icons.github"></use></svg>
                         GitHub
                     </a>
-                    <a id="heroEmail" href="#" class="btn-outline">
-                        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor"
-                             stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-                            <rect x="3" y="5" width="18" height="14" rx="2"></rect>
-                            <path d="m3 7 9 6 9-6"></path>
-                        </svg>
-                        <span id="emailMeText">Email me</span>
+                    <a :href="mailHref" class="btn-outline">
+                        <svg class="inline-icon" aria-hidden="true"><use :href="icons.mail"></use></svg>
+                        <span>{{ current.ui.emailMe }}</span>
                     </a>
                 </div>
             </div>
         </section>
 
         <section class="contact-section">
-            <div id="contactGrid" class="contact-grid"></div>
+            <div class="contact-grid">
+                <component v-for="card in contactCards"
+                           :key="card.label"
+                           :is="card.href ? 'a' : 'div'"
+                           :href="card.href"
+                           :target="card.blank ? '_blank' : null"
+                           :rel="card.blank ? 'noopener' : null"
+                           class="card contact-card"
+                           :class="{ link: card.href }"
+                           data-print-avoid>
+                    <span class="contact-ico">
+                        <svg class="inline-icon" aria-hidden="true"><use :href="card.icon"></use></svg>
+                    </span>
+                    <span style="min-width:0">
+                        <span class="contact-label">{{ card.label }}</span>
+                        <span class="contact-val" :class="{ truncate: card.truncate }">{{ card.value }}</span>
+                    </span>
+                </component>
+            </div>
         </section>
 
         <section id="about" class="section">
-            <div class="sec-head"><span id="aboutNum" class="sec-num">01</span>
-                <h2 id="aboutTitle" class="sec-title">About</h2><span class="sec-rule"></span></div>
-            <div id="aboutBody" class="about-card" data-print-avoid></div>
+            <div class="sec-head">
+                <span class="sec-num">01</span>
+                <h2 class="sec-title">{{ current.ui.sectionAbout }}</h2>
+                <span class="sec-rule"></span>
+            </div>
+            <div class="about-card" data-print-avoid>
+                <p v-for="paragraph in current.about"
+                   :key="paragraph"
+                   style="margin:0;font-size:16px;line-height:1.7;color:var(--muted);text-wrap:pretty">
+                    {{ paragraph }}
+                </p>
+            </div>
         </section>
 
         <section id="skills" class="section">
-            <div class="sec-head"><span id="skillsNum" class="sec-num">02</span>
-                <h2 id="skillsTitle" class="sec-title">Skills</h2><span class="sec-rule"></span></div>
-            <div id="skillsGrid" class="skills-grid"></div>
+            <div class="sec-head">
+                <span class="sec-num">02</span>
+                <h2 class="sec-title">{{ current.ui.sectionSkills }}</h2>
+                <span class="sec-rule"></span>
+            </div>
+            <div class="skills-grid">
+                <div v-for="group in current.skills" :key="group.cat" class="card pad20" data-print-avoid>
+                    <h3 class="kicker">{{ group.cat }}</h3>
+                    <div style="display:flex;flex-wrap:wrap;gap:8px">
+                        <span v-for="item in group.items" :key="item" class="chip chip-soft">{{ item }}</span>
+                    </div>
+                </div>
+            </div>
         </section>
 
         <section id="education" class="section">
-            <div class="sec-head"><span id="eduNum" class="sec-num">03</span>
-                <h2 id="eduTitle" class="sec-title">Education</h2><span class="sec-rule"></span></div>
-            <div id="eduCard" class="edu-card" data-print-avoid></div>
+            <div class="sec-head">
+                <span class="sec-num">03</span>
+                <h2 class="sec-title">{{ current.ui.sectionEducation }}</h2>
+                <span class="sec-rule"></span>
+            </div>
+            <div class="edu-card" data-print-avoid>
+                <span class="edu-ico">
+                    <svg class="inline-icon" aria-hidden="true"><use :href="icons.cap"></use></svg>
+                </span>
+                <div style="flex:1;min-width:240px">
+                    <div style="display:flex;justify-content:space-between;gap:14px;flex-wrap:wrap;align-items:baseline">
+                        <h3 class="edu-school">{{ current.education.school }}</h3>
+                        <span class="mono-meta">{{ current.education.period }}</span>
+                    </div>
+                    <p class="edu-prog">{{ current.education.program }}</p>
+                    <div style="display:flex;flex-wrap:wrap;gap:7px">
+                        <span v-for="tech in current.education.tech" :key="tech" class="chip chip-neutral">{{ tech }}</span>
+                    </div>
+                </div>
+            </div>
         </section>
 
         <section id="experience" class="section">
-            <div class="sec-head" style="margin-bottom:34px"><span id="expNum" class="sec-num">04</span>
-                <h2 id="expTitle" class="sec-title">Work Experience</h2><span class="sec-rule"></span></div>
-            <div id="timeline" class="timeline"></div>
+            <div class="sec-head" style="margin-bottom:34px">
+                <span class="sec-num">04</span>
+                <h2 class="sec-title">{{ current.ui.sectionExperience }}</h2>
+                <span class="sec-rule"></span>
+            </div>
+            <div class="timeline">
+                <div v-for="job in current.experience" :key="job.company" class="tl-item">
+                    <span class="tl-node"></span>
+                    <div style="display:flex;justify-content:space-between;gap:16px;flex-wrap:wrap;align-items:baseline;margin-bottom:4px">
+                        <h3 class="tl-company">{{ job.company }}</h3>
+                        <span class="tl-period">
+                            <span v-if="job.current" class="dot-live">●</span>{{ job.period }}
+                        </span>
+                    </div>
+                    <p class="tl-role">
+                        {{ job.role }} · <span style="color:var(--muted);font-weight:500">{{ job.domain }}</span>
+                    </p>
+                    <div style="display:flex;flex-direction:column;gap:16px">
+                        <div v-for="project in job.projects" :key="project.name" class="proj-card" data-print-avoid>
+                            <div style="display:flex;align-items:baseline;gap:10px;flex-wrap:wrap;margin-bottom:4px">
+                                <h4 class="proj-name">{{ project.name }}</h4>
+                            </div>
+                            <p class="proj-sub">{{ project.sub }}</p>
+                            <div style="display:flex;flex-wrap:wrap;gap:6px;margin-bottom:14px">
+                                <span v-for="tech in project.stack" :key="tech" class="chip chip-soft sm">{{ tech }}</span>
+                            </div>
+                            <ul class="bullets">
+                                <li v-for="bullet in project.bullets" :key="bullet" class="bullet">{{ bullet }}</li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+            </div>
         </section>
 
         <section id="projects" class="section" style="padding-bottom:30px">
-            <div class="sec-head"><span id="prjNum" class="sec-num">05</span>
-                <h2 id="prjTitle" class="sec-title">Personal Projects</h2><span class="sec-rule"></span></div>
-            <div id="projectsGrid" class="projects-grid"></div>
+            <div class="sec-head">
+                <span class="sec-num">05</span>
+                <h2 class="sec-title">{{ current.ui.sectionProjects }}</h2>
+                <span class="sec-rule"></span>
+            </div>
+            <div class="projects-grid">
+                <div v-for="project in current.projects" :key="project.name" class="card prj-card-outer" data-print-avoid>
+                    <div style="display:flex;align-items:center;justify-content:space-between;gap:12px;margin-bottom:12px">
+                        <span class="prj-ico" style="overflow:hidden">
+                            <img v-if="project.icon"
+                                 :src="project.icon"
+                                 :alt="project.name"
+                                 style="width:100%;height:100%;object-fit:cover;display:block">
+                            <svg v-else class="inline-icon" aria-hidden="true"><use :href="icons.cube"></use></svg>
+                        </span>
+                        <span class="kicker" style="margin:0">{{ project.tag }}</span>
+                    </div>
+                    <h3 class="prj-title">{{ project.name }}</h3>
+                    <p class="prj-desc">{{ project.desc }}</p>
+                    <div style="display:flex;flex-wrap:wrap;gap:8px">
+                        <a v-for="link in project.links"
+                           :key="link.url"
+                           :href="link.url"
+                           target="_blank"
+                           rel="noopener"
+                           class="prj-link">
+                            <svg v-if="projectLinkIcon(link.url)" class="inline-icon" aria-hidden="true">
+                                <use :href="projectLinkIcon(link.url)"></use>
+                            </svg>
+                            <span>{{ link.label }}</span>
+                            <svg v-if="!projectLinkIcon(link.url)" class="inline-icon" aria-hidden="true">
+                                <use :href="icons.arrow"></use>
+                            </svg>
+                        </a>
+                    </div>
+                </div>
+            </div>
         </section>
 
         <footer class="foot">
             <p class="foot-name">Hậu Phạm</p>
-            <p id="footRole" class="foot-role"></p>
+            <p class="foot-role">{{ current.ui.roleTitle }} · {{ current.ui.location }}</p>
             <div class="foot-links no-print">
-                <a id="footEmail" href="#"></a>
+                <a :href="mailHref">{{ contact.email }}</a>
                 <span class="dot">·</span>
-                <a id="footGithub" href="#" target="_blank" rel="noopener">GitHub</a>
+                <a :href="contact.githubUrl" target="_blank" rel="noopener">GitHub</a>
                 <span class="dot">·</span>
-                <a id="footFacebook" href="#" target="_blank" rel="noopener">Facebook</a>
+                <a :href="contact.facebookUrl" target="_blank" rel="noopener">Facebook</a>
             </div>
         </footer>
 
@@ -133,6 +257,9 @@
 
 <script src="assets/avatar.js"></script>
 <script src="assets/data.js"></script>
+<script src="assets/config.js"></script>
+<script src="assets/store.js"></script>
+<script src="assets/vendor/vue.global.prod.js"></script>
 <script src="assets/app.js"></script>
 </body>
 </html>

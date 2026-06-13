@@ -16,12 +16,23 @@ body {
     transition: background .3s, color .3s
 }
 
+[v-cloak] {
+    display: none
+}
+
 ::selection {
     background: rgba(2, 132, 199, 0.18)
 }
 
 a {
     text-decoration: none
+}
+
+.inline-icon {
+    width: 1em;
+    height: 1em;
+    display: inline-block;
+    flex-shrink: 0
 }
 
 ul {
